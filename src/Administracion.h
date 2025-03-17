@@ -45,6 +45,13 @@ public:
     void agregarPropietario();
 
     void relacionarPropietarioPropiedad();
+
+    // Nuevo método para generar el reporte de propiedades
+    void generarReportePropiedades();
+
+    // Nuevo método para actualizar el estado del cuarto útil
+    void actualizarEstadoCuartoUtil(double idPropiedad, bool nuevoEstado);
+
 };
 
 #endif

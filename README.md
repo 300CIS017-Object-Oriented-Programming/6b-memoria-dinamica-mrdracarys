@@ -480,6 +480,25 @@ Total administración recaudada: 850000
 ### 🔥Ejercicio  ¿Qué sigue?
 📌 Implementa otra mejora en el proyecto, documenta en este README la nueva funcionalidad, pruébala y compártela
 
+
+
+## Nuevas Funcionalidades
+
+### Actualización del estado de un Cuarto Útil
+
+Se ha agregado la funcionalidad para actualizar el estado del cuarto útil de una propiedad. Con el método `actualizarEstadoCuartoUtil`, se puede cambiar el estado del cuarto útil a "terminado" o "no terminado" para una propiedad específica.
+
+**Uso:**
+
+El método recibe dos parámetros:
+- `idPropiedad`: el identificador único de la propiedad a la que pertenece el cuarto útil.
+- `nuevoEstado`: un valor booleano donde `true` indica que el cuarto está terminado y `false` que no lo está.
+
+```cpp
+// Ejemplo de uso:
+administracion.actualizarEstadoCuartoUtil(1, true);
+
+
 ## UML
 <details>
 <summary>🔍 Diagrama propuesto</summary>
