@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/1W95edGO)
 ## Torres de Niza - solución completa
 
 Este documento te guiará en el desarrollo del sistema de administración de propiedades del conjunto **Torres de Niza**, aplicando conceptos clave de **POO en C++**. Aprenderás sobre la interacción entre clases, gestión dinámica de memoria, y cómo optimizar el uso de **apuntadores y referencias**.
@@ -478,6 +479,25 @@ Total administración recaudada: 850000
 
 ### 🔥Ejercicio  ¿Qué sigue?
 📌 Implementa otra mejora en el proyecto, documenta en este README la nueva funcionalidad, pruébala y compártela
+
+
+
+## Nuevas Funcionalidades
+
+### Actualización del estado de un Cuarto Útil
+
+Se ha agregado la funcionalidad para actualizar el estado del cuarto útil de una propiedad. Con el método `actualizarEstadoCuartoUtil`, se puede cambiar el estado del cuarto útil a "terminado" o "no terminado" para una propiedad específica.
+
+**Uso:**
+
+El método recibe dos parámetros:
+- `idPropiedad`: el identificador único de la propiedad a la que pertenece el cuarto útil.
+- `nuevoEstado`: un valor booleano donde `true` indica que el cuarto está terminado y `false` que no lo está.
+
+```cpp
+// Ejemplo de uso:
+administracion.actualizarEstadoCuartoUtil(1, true);
+
 
 ## UML
 <details>

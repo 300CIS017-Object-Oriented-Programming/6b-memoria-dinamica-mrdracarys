@@ -18,18 +18,31 @@ Administracion::Administracion() {
  */
 void Administracion::inicializarDatos() {
     Propietario *persona1 = new Propietario();
+    cout << "Objeto Propietario 'persona1' creado exitosamente." << endl;
     Propietario *persona2 = new Propietario();
+    cout << "Objeto Propietario 'persona2' creado exitosamente." << endl;
     Propietario *persona3 = new Propietario();
+    cout << "Objeto Propietario 'persona3' creado exitosamente." << endl;
     Propietario *persona4 = new Propietario();
-    Propiedad *prop1 = new Propiedad();
-    Propiedad *prop2 = new Propiedad();
-    Propiedad *prop3 = new Propiedad();
-    Propiedad *prop4 = new Propiedad(); // Automaticamente al constructor x defecto
-    CuartoUtil *cuarto1 = new CuartoUtil();
-    CuartoUtil *cuarto2 = new CuartoUtil();
-    CuartoUtil *cuarto3 = new CuartoUtil();
+    cout << "Objeto Propietario 'persona4' creado exitosamente." << endl;
 
-    //Inicializar cuartos utiles
+    Propiedad *prop1 = new Propiedad();
+    cout << "Objeto Propiedad 'prop1' creado exitosamente." << endl;
+    Propiedad *prop2 = new Propiedad();
+    cout << "Objeto Propiedad 'prop2' creado exitosamente." << endl;
+    Propiedad *prop3 = new Propiedad();
+    cout << "Objeto Propiedad 'prop3' creado exitosamente." << endl;
+    Propiedad *prop4 = new Propiedad(); // Constructor por defecto
+    cout << "Objeto Propiedad 'prop4' creado exitosamente." << endl;
+
+    CuartoUtil *cuarto1 = new CuartoUtil();
+    cout << "Objeto CuartoUtil 'cuarto1' creado exitosamente." << endl;
+    CuartoUtil *cuarto2 = new CuartoUtil();
+    cout << "Objeto CuartoUtil 'cuarto2' creado exitosamente." << endl;
+    CuartoUtil *cuarto3 = new CuartoUtil();
+    cout << "Objeto CuartoUtil 'cuarto3' creado exitosamente." << endl;
+
+    // Inicializar cuartos útiles
     vector<CuartoUtil *> cuartosUtiles;
     cuarto1->setPiso(2);
     cuarto1->setNumeracion("A201");
@@ -53,7 +66,6 @@ void Administracion::inicializarDatos() {
     prop1->setHayParqueadero(true);
     prop1->setPiso(10);
 
-
     prop2->setNumIdentificacion(contIds++);
     prop2->setAreaPropiedad(30);
     prop2->setHayParqueadero(false);
@@ -74,12 +86,16 @@ void Administracion::inicializarDatos() {
     propiedades.push_back(prop3);
     propiedades.push_back(prop4);
 
-
     // Inicializo propietarios
     persona1->setNombre("Debora Vilar");
     persona1->setIdentificacion(20202492);
     persona1->setPropiedad(prop1);
     persona1->getPropiedad()->setCuartoUtil(cuarto1);
+
+    // Imprimir direcciones de memoria para verificar que la propiedad asignada es la misma que prop1
+    cout << "Dirección de memoria de persona1: " << persona1 << endl;
+    cout << "Dirección de memoria de la propiedad asignada a persona1: " << persona1->getPropiedad() << endl;
+    cout << "Dirección de memoria de prop1: " << prop1 << endl;
 
     persona2->setNombre("Ignacio Rodriguez");
     persona2->setIdentificacion(88888);
@@ -94,7 +110,7 @@ void Administracion::inicializarDatos() {
     persona4->setNombre("Modesto Villaverde");
     persona4->setIdentificacion(31321432);
     persona4->setPropiedad(prop4);
-    // Ojo a la persona4 no se le pone cuarto útil a propósito, entonces se debe controlar en el constructor.
+
 
     // Incluir los propietarios en el vector
     propietarios.push_back(persona1);
@@ -307,3 +323,59 @@ void Administracion::imprimirPropietariosCuartoUtil(bool isTerminado) {
         }
     }
 }
+
+void Administracion::generarReportePropiedades() {
+    float totalRecaudado = 0.0f;
+    cout << "=== Reporte de Propiedades ===" << endl;
+
+    for (size_t i = 0; i < propietarios.size(); ++i) {
+        Propietario* propietario = propietarios[i];
+        cout << "\nPropietario: " << propietario->getNombre()
+             << ", ID: " << propietario->getIdentificacion() << endl;
+
+        if (propietario->getPropiedad() != nullptr) {
+            cout << "Información de la propiedad:" << endl;
+            propietario->getPropiedad()->mostrarDatos();
+
+            if (propietario->getPropiedad()->getCuartoUtil() != nullptr) {
+                cout << "La propiedad tiene un cuarto util." << endl;
+            } else {
+                cout << "La propiedad no tiene cuarto util." << endl;
+            }
+
+            // Sumar el recargo calculado para esta propiedad
+            totalRecaudado += propietario->getPropiedad()->calcularRecargo(cobroAscensor, costoBase, recargo);
+        } else {
+            cout << "No tiene propiedad asignada." << endl;
+        }
+
+        cout << "---------------------------------" << endl;
+    }
+
+    cout << "\nTotal de administracion recaudada: " << totalRecaudado << endl;
+}
+
+void Administracion::actualizarEstadoCuartoUtil(double idPropiedad, bool nuevoEstado) {
+    bool propiedadEncontrada = false;
+    for (size_t i = 0; i < propiedades.size(); ++i) {
+        if (propiedades[i]->getNumIdentificacion() == idPropiedad) {
+            propiedadEncontrada = true;
+            CuartoUtil* cuarto = propiedades[i]->getCuartoUtil();
+            if (cuarto != nullptr) {
+                cuarto->setEstaTerminado(nuevoEstado);
+                cout << "El estado del cuarto util de la propiedad "
+                     << idPropiedad << " se ha actualizado a "
+                     << (nuevoEstado ? "terminado" : "No terminado") << endl;
+            } else {
+                cout << "La propiedad " << idPropiedad
+                     << " no tiene cuarto util asignado." << endl;
+            }
+            break;
+        }
+    }
+    if (!propiedadEncontrada) {
+        cout << "Propiedad con ID " << idPropiedad << " no encontrada." << endl;
+    }
+}
+
+

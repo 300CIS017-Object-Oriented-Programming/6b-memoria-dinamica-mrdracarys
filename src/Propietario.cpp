@@ -26,9 +26,8 @@ Propiedad *Propietario::getPropiedad() const
 {
     return propiedad;
 }
-
-long Propietario::getIdentificacion() const
-{
+//Modificamos para que devuelva una referencia y no un valor
+const long & Propietario::getIdentificacion() const {
     return identificacion;
 }
 
